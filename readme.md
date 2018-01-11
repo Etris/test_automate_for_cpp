@@ -3,3 +3,14 @@ What is that?
 
 Run example:
 >python setPy -p program -t file -s sets.txt -o info.txt -i set1
+
+Let me explain parameters behind that:
+> -p/--program {param}, where at {param} is program name
+
+> -t/--output-type {param}, where {param} has value 'mail' or 'file' - give information to script about type of output
+
+> -s/--input-sets {param}, where at {param} is file with data sets (check file: sets.txt)
+
+> -o/--output {param}, where at {param} is name of file with information about output email adress or output file name
+
+> -i/--input-file {param}, where at {param} is input data file for program
