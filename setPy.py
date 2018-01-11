@@ -34,12 +34,11 @@ class thread_master(object):
         thread.start()
 
     def run(self):
-        dataSets = readSets(inputFile)
+        data_sets = readSets(inputFile)
         result = ""
-        for key in dataSets.keys():
-            result += runSoft(programName, inputFileName, key, dataSets[key])
+        for key in data_sets.keys():
+            result += runSoft(programName, inputFileName, key, data_sets[key])
             result += '\t'
-
         saveData(outputType, result, readDest(outputDestination))
 
 
@@ -49,13 +48,13 @@ def readDest(file):
     return destination
 
 def readSets(file):
-    tmpDict = dict()
+    tmp_dict = dict()
     handler = open(file)
     for line in handler:
-        tmpString = line.split()
-        tmpDict[tmpString[0]] = tmpString[1]
+        tmp_string = line.split()
+        tmp_dict[tmp_string[0]] = tmp_string[1]
     handler.close()
-    return tmpDict
+    return tmp_dict
 
 def runSoft(file, inName, parFirst, parSecond):
     p = subprocess.Popen(['./{0}'.format(file), '{0} {1} {2}'.format(inName, parFirst, parSecond)], stdout=subprocess.PIPE)
