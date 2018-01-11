@@ -3,6 +3,7 @@ import subprocess
 import smtplib
 import datetime
 import os
+import threading
 from email.mime.text import MIMEText
 
 parser = argparse.ArgumentParser(description='A software to automate tests with predefined data sets on '
@@ -25,6 +26,22 @@ outputType = args.type;
 inputFile = args.sets;
 outputDestination = args.output;
 inputFileName = args.input;
+
+class thread_master(object):
+    def __init__(self):
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+
+    def run(self):
+        dataSets = readSets(inputFile)
+        result = ""
+        for key in dataSets.keys():
+            result += runSoft(programName, inputFileName, key, dataSets[key])
+            result += '\t'
+
+        saveData(outputType, result, readDest(outputDestination))
+
 
 def readDest(file):
     handler = open(file)
@@ -68,14 +85,7 @@ def sendMail(data, dest):
     s.quit()
 
 
-dataSets = readSets(inputFile)
-result = ""
-dataList = list()
-for key in dataSets.keys():
-    result += runSoft(programName, inputFileName, key, dataSets[key])
-    result += '\t'
-
-saveData(outputType, result, readDest(outputDestination))
+new_thread = thread_master()
 
 
 
