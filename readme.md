@@ -14,3 +14,9 @@
 > -o/--output {param}, where at {param} is name of file with information about output email adress or output file name
 
 > -i/--input-file {param}, where at {param} is input data file for program
+
+## To-Do
+- [x] Finish first part of program - give main functionality
+- [ ] Add daemon/threading
+- [ ] Mail sending tests
+- [ ] Extend parameters options
